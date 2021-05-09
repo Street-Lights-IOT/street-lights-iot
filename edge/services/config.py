@@ -54,7 +54,6 @@ class Config(metaclass=Singleton):
         self.config.set("INFLUX_DB","org", os.environ.get("DOCKER_INFLUXDB_INIT_ORG") or self.config.get("INFLUX_DB", "org"))
         self.config.set("INFLUX_DB","bucket", os.environ.get("DOCKER_INFLUXDB_INIT_BUCKET") or self.config.get("INFLUX_DB", "bucket"))
 
-        print("STO QUAAAAAAAAAA")
         print(self.config.get("RESOURCES_DB", "name"))
 
         with open(_CONFIG_PATH, "w") as conf:

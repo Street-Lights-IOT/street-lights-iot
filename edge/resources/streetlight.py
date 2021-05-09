@@ -12,13 +12,13 @@ import json
 class StreetLightResource(Resource):
     """Resource that represents the street light"""
     
-    def __init__(self, mac, order, ip, registered_at=None, last_seen_at=None):
+    def __init__(self, street_light):
         super().__init__()
-        self._light = StreetLight(mac=mac, order=order, ip=ip, registered_at=registered_at, last_seen_at=last_seen_at)
+        self._light = street_light
 
     @classmethod
-    def from_light_data(cls, light_data):
-        return cls(light_data.mac, light_data.order, light_data.ip, light_data.registered_at, light_data.last_seen_at)
+    def from_light_data(cls, mac, order, ip, registered_at=None, last_seen_at=None):
+        return cls(StreetLight(mac=mac, order=order, ip=ip, registered_at=registered_at, last_seen_at=last_seen_at))
 
     async def render_get(self, request):
         return aiocoap.Message(payload=self.to_json().encode("utf-8"), token=request.token, code=aiocoap.Code.CONTENT)
@@ -35,12 +35,12 @@ class StreetLightResource(Resource):
             Database().influx_write_proximity(self._light.order, data.get("proximity"), datetime.utcnow())
         
         self.seen()
+        self.save()
 
         return aiocoap.Message(code=aiocoap.CHANGED, token=request.token)
 
     def seen(self):
         self._light.last_seen_at = datetime.utcnow()
-        self._light.save()
 
     def to_json(self):
         return json.dumps(self.to_dict())

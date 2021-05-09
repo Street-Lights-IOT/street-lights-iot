@@ -29,7 +29,7 @@ class ClusterResource(Resource):
 
         # Read from lights stored in the database
         for light in StreetLight.select():
-            registered_light = StreetLightResource.from_light_data(light)
+            registered_light = StreetLightResource(light)
             self.lights.append(registered_light)
 
         # Read enabled mode
@@ -69,26 +69,25 @@ class ClusterResource(Resource):
         """
 
         data = json.loads(request.payload)
-        new_light = StreetLightResource(
+        logging.info(
+            f"The IP address {utils.get_ip_from_socket_address(request.remote.hostinfo)} is trying to register with {data}"
+        )
+        new_light = StreetLightResource.from_light_data(
             data["mac"],
             len(self.lights) + 1,
             utils.get_ip_from_socket_address(request.remote.hostinfo),
             registered_at=datetime.utcnow().isoformat(),
             last_seen_at=datetime.utcnow().isoformat()
         )
-        print("NEW LIGHT CI PROVA")
 
         # Search if MAC is already registered
         found = False
         for light in self.lights:
             if light.mac == new_light.mac:
                 found = True
-                print("MAC UGUALE")
-                if light.ip != new_light.ip:
-                    light.ip = new_light.ip
-                    print("IP UGUALE")
-                    light.seen()
-                    light.save()
+                light.ip = new_light.ip
+                light.seen()
+                light.save()
                 
                 payload = json.dumps({"order": light.order})
 
@@ -99,7 +98,6 @@ class ClusterResource(Resource):
                 )
 
         if not found:
-            print("NULLA TROVAI")
             self.lights.append(new_light)
             self.cluster.add_light_resource(new_light)
             saved = new_light.save()
