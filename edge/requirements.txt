@@ -1,0 +1,44 @@
+aiocoap==0.4.1
+cbor2==5.2.0
+cryptography==3.4.7
+  - cffi [required: >=1.12, installed: 1.14.5]
+    - pycparser [required: Any, installed: 2.20]
+docopt==0.6.2
+DTLSSocket==0.1.12
+  - Cython [required: Any, installed: 0.29.23]
+filelock==3.0.12
+ge25519==0.2.0
+  - bitlist [required: >=0.3.1, installed: 0.3.1]
+    - parts [required: >=0.2.1, installed: 1.0.2]
+  - fe25519 [required: >=0.2.0, installed: 0.2.0]
+    - bitlist [required: >=0.3.1, installed: 0.3.1]
+      - parts [required: >=0.2.1, installed: 1.0.2]
+    - fountains [required: >=0.2.1, installed: 0.2.1]
+      - bitlist [required: >=0.3.1, installed: 0.3.1]
+        - parts [required: >=0.2.1, installed: 1.0.2]
+    - parts [required: >=0.2.1, installed: 1.0.2]
+  - fountains [required: >=0.2.1, installed: 0.2.1]
+    - bitlist [required: >=0.3.1, installed: 0.3.1]
+      - parts [required: >=0.2.1, installed: 1.0.2]
+  - parts [required: >=0.2.1, installed: 1.0.2]
+influxdb-client==1.17.0
+  - certifi [required: >=14.05.14, installed: 2020.12.5]
+  - python-dateutil [required: >=2.5.3, installed: 2.8.1]
+    - six [required: >=1.5, installed: 1.16.0]
+  - pytz [required: >=2019.1, installed: 2021.1]
+  - rx [required: >=3.0.1, installed: 3.2.0]
+  - setuptools [required: >=21.0.0, installed: 44.0.0]
+  - six [required: >=1.10, installed: 1.16.0]
+  - urllib3 [required: >=1.15.1, installed: 1.26.4]
+LinkHeader==0.4.3
+peewee==3.14.4
+psycopg2==2.8.6
+Pygments==2.8.1
+termcolor==1.1.0
+websockets==8.1
+yarg==0.1.9
+  - requests [required: Any, installed: 2.25.1]
+    - certifi [required: >=2017.4.17, installed: 2020.12.5]
+    - chardet [required: >=3.0.2,<5, installed: 4.0.0]
+    - idna [required: >=2.5,<3, installed: 2.10]
+    - urllib3 [required: >=1.21.1,<1.27, installed: 1.26.4]
