@@ -24,15 +24,18 @@ class StreetLightResource(Resource):
         return aiocoap.Message(payload=self.to_json().encode("utf-8"), token=request.token, code=aiocoap.Code.CONTENT)
 
     async def render_put(self, request):
-        data = json.loads(request.payload)\
+        data = json.loads(request.payload)
         # TODO check if ip it's the same
         changed = True
 
-        if data.get("brightness"):
+        if data.get("brightness") != None:
             Database().influx_write_brightness(self._light.order, data.get("brightness"), datetime.utcnow())
 
-        if data.get("proximity"):
+        if data.get("proximity") != None:
             Database().influx_write_proximity(self._light.order, data.get("proximity"), datetime.utcnow())
+
+        if data.get("fault") != None:
+            Database().influx_write_fault(self._light.order, data.get("fault"), datetime.utcnow())
         
         self.seen()
         self.save()

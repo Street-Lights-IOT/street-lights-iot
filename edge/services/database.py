@@ -42,3 +42,7 @@ class Database(object):
     def influx_write_proximity(cls, order, value, time=datetime.utcnow()):
         point = Point("proximity").tag("street-light", order).field("value" ,value).time(time, WritePrecision.S)
         cls.influx_write_api.write(cls.influx_bucket, cls.influx_org, point)
+
+    def influx_write_fault(cls, order, value, time=datetime.utcnow()):
+        point = Point("fault").tag("street-light", order).field("value" ,value).time(time, WritePrecision.S)
+        cls.influx_write_api.write(cls.influx_bucket, cls.influx_org, point)
