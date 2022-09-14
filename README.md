@@ -1,4 +1,17 @@
 # Street Lights IOT
+SmartLights IoT is a system to manage and optimize the street lighting system. More details on operation and specifications can be found in the [documentation](docs/documentation.pdf).
+
+To provide a small overview, the 3 main modes are the following.
+
+### Day mode
+![assets/day.gif](assets/day.gif)
+
+### Night mode
+![assets/night.gif](assets/night.gif)
+
+### Night mode eco-friendly
+![assets/night-eco.gif](assets/night-eco.gif)
+
 
 ## Quickstart
 
@@ -18,3 +31,7 @@
 2. Start the containers
 
         docker-compose up
+
+
+## Architecture
+![assets/architecture.png](assets/architecture.png)
